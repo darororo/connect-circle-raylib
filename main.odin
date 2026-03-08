@@ -32,17 +32,32 @@ main :: proc() {
 
 	builder := strings.Builder{}
 
+
 	c1 := Circle {
-		center = rl.Vector2{200.0, 120.0},
-		radius = 4.0,
-		color  = rl.PURPLE,
+		center   = rl.Vector2{200.0, 120.0},
+		radius   = 4.0,
+		color    = rl.PURPLE,
+		velocity = rl.Vector2{100.0, 40.0},
 	}
 
 	c2 := Circle {
-		center = rl.Vector2{100.0, 120.0},
-		radius = 4.0,
-		color  = rl.PINK,
+		center   = rl.Vector2{100.0, 120.0},
+		radius   = 4.0,
+		color    = rl.PINK,
+		velocity = rl.Vector2{100.0, 40.0},
 	}
+
+	c3 := Circle {
+		center   = rl.Vector2{100.0, 120.0},
+		radius   = 4.0,
+		color    = rl.PINK,
+		velocity = rl.Vector2{120.0, -10.0},
+	}
+
+	world := World {
+		circles = []Circle{c1, c2, c3},
+	}
+
 
 	for !rl.WindowShouldClose() {
 
@@ -51,13 +66,8 @@ main :: proc() {
 
 		rl.ClearBackground(rl.RAYWHITE)
 
-
-		draw_circle(&c1)
-		draw_circle(&c2)
-
-		update_circle(&c1, rl.Vector2{100, 100})
-		connect_circles(&c1, &c2)
-
+		draw_world(&world)
+		update_world(&world)
 
 		draw_title("HELLO")
 	}
