@@ -16,9 +16,11 @@ draw_title :: proc(text: string) {
 SCREEN_WIDTH :: 480
 SCREEN_HEIGHT :: 480
 
+MAX_CIRCLES :: 100
+
 main :: proc() {
 
-	rl.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "raylib-odin example :: Bunnymark")
+	rl.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "CONNECT MANY")
 	defer rl.CloseWindow()
 
 	world := World{}

@@ -55,10 +55,9 @@ world_connect_circles :: proc(world: ^World) {
 }
 
 add_circle :: proc(world: ^World) {
-	if (len(world.circles) > 100) {
+	if (len(world.circles) > MAX_CIRCLES) {
 		return
 	}
-
 
 	// Center of circle
 	cx, cy: f32
