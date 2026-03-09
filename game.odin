@@ -19,16 +19,12 @@ draw_circle :: proc(c: ^Circle) {
 	rl.DrawCircleV(c.center, c.radius, c.color)
 }
 
-get_line_color :: proc(alpha: u8) -> rl.Color {
-	return rl.Color{0, 0, 0, alpha}
-}
-
-connect_circles :: proc(c1: ^Circle, c2: ^Circle) {
-	distance := rl.Vector2Distance(c1.center, c2.center)
+connect_lines :: proc(c1: rl.Vector2, c2: rl.Vector2, color: [3]u8 = {0, 0, 0}) {
+	distance := rl.Vector2Distance(c1, c2)
 	max_length: f32 = 80.0
 	if (distance < max_length) {
 		alpha: u8 = cast(u8)((max_length - distance) / max_length * 255)
-		rl.DrawLineV(c1.center, c2.center, get_line_color(alpha))
+		rl.DrawLineEx(c1, c2, 2, rl.Color{color[0], color[1], color[2], alpha})
 	}
 }
 
@@ -55,9 +51,11 @@ update_world :: proc(world: ^World) {
 world_connect_circles :: proc(world: ^World) {
 	for i in 0 ..< len(world.circles) {
 		for j in i ..< len(world.circles) {
-			connect_circles(&world.circles[i], &world.circles[j])
+			connect_lines(world.circles[i].center, world.circles[j].center)
 		}
 
+		mouse_pos := rl.GetMousePosition()
+		connect_lines(world.circles[i].center, mouse_pos, [3]u8{230, 41, 55})
 	}
 }
 
