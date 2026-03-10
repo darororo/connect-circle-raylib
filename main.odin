@@ -16,7 +16,7 @@ draw_title :: proc(text: string) {
 SCREEN_WIDTH :: 480
 SCREEN_HEIGHT :: 480
 
-MAX_CIRCLES :: 100
+MAX_CIRCLES :: 50
 
 main :: proc() {
 
@@ -36,7 +36,6 @@ main :: proc() {
 		draw_world(&world)
 		update_world(&world)
 		world_connect_circles(&world)
-
 
 		draw_title("HELLO")
 
